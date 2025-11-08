@@ -17,6 +17,8 @@ class HomeView extends StatelessWidget {
           color: Colors.white,
           backgroundColor: Colors.black,
           onRefresh: () async {
+            controller.timer?.cancel();
+            controller.timer = null;
             await controller.loadInitial();
           },
           child: SingleChildScrollView(
@@ -50,7 +52,7 @@ class HomeView extends StatelessWidget {
           backgroundColor: Colors.green,
           shape: CircleBorder(),
           onPressed: () {},
-          child: Icon(Icons.shopping_cart, size: 32),
+          child: Icon(Icons.shopping_cart, size: 32,color: Colors.white,),
         ),
       ),
 

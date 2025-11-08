@@ -83,8 +83,7 @@ class HomeController extends GetxController {
     try {
       isLoading.value = true;
 
-      timer?.cancel();
-      timer = null;
+
 
 
       debugPrint('${dotenv.env['API_BASE_URL']}${ApiEndpoint.bannerEndpoint}');
