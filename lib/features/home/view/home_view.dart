@@ -41,6 +41,50 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: SizedBox(
+        height: 80,
+        width: 80,
+        child: FloatingActionButton(
+          backgroundColor: Colors.green,
+          shape: CircleBorder(),
+          onPressed: () {},
+          child: Icon(Icons.shopping_cart, size: 32),
+        ),
+      ),
+
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        notchMargin: 6,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppValues.contentPadding),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.home_filled, color: Colors.green),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.favorite_border, color: Colors.grey.shade400),
+              ),
+
+              SizedBox(width: 40), // Space for FAB
+
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.view_list_outlined, color: Colors.grey.shade400),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.menu, color: Colors.grey.shade400),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -80,7 +124,10 @@ Widget _buildSearchView(BuildContext context, HomeController controller) {
         child: Row(
           children: [
             Expanded(
-              child: Text('Search food and restaurant hare...', style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.grey)),
+              child: Text(
+                'Search food and restaurant hare...',
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.black, fontFamily: 'FontBold'),
+              ),
             ),
             SizedBox(width: AppValues.contentPadding),
             Icon(Icons.search_rounded, color: Colors.grey),
@@ -142,7 +189,10 @@ Widget _buildBannerView(BuildContext context, HomeController controller) {
                           margin: const EdgeInsets.symmetric(horizontal: 4),
                           width: isActive ? 24 : 6,
                           height: isActive ? 6 : 6,
-                          decoration: BoxDecoration(color: isActive ? Colors.green : Colors.grey.shade400, borderRadius: BorderRadius.circular(16.0)),
+                          decoration: BoxDecoration(
+                            color: isActive ? Colors.green : Colors.grey.shade400,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                         ),
                       );
                     }),
@@ -201,8 +251,12 @@ Widget _buildCategoryView(BuildContext context, HomeController controller) {
                             width: 58,
                             height: 58,
                             clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(borderRadius: BorderRadiusGeometry.circular(AppValues.parentCornerRadius)),
-                            child: category.imageFullUrl != null ? Image.network(category.imageFullUrl!) : const Icon(Icons.error),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadiusGeometry.circular(AppValues.parentCornerRadius),
+                            ),
+                            child: category.imageFullUrl != null
+                                ? Image.network(category.imageFullUrl!)
+                                : const Icon(Icons.error),
                           ),
                           SizedBox(height: AppValues.contentPadding / 2),
                           Text(category.name ?? '-', style: Theme.of(context).textTheme.labelSmall!.copyWith()),
@@ -224,7 +278,10 @@ Widget _buildPopularFoodView(BuildContext context, HomeController controller) {
         padding: const EdgeInsets.symmetric(horizontal: AppValues.contentPadding),
         child: Row(
           children: [
-            Text('Popular Food Nearby', style: Theme.of(context).textTheme.labelLarge!.copyWith(fontFamily: 'FontBold')),
+            Text(
+              'Popular Food Nearby',
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(fontFamily: 'FontBold'),
+            ),
             Spacer(),
             Text(
               'View All',
@@ -252,7 +309,7 @@ Widget _buildPopularFoodView(BuildContext context, HomeController controller) {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.zero,
+                  padding: EdgeInsets.symmetric(horizontal: AppValues.contentPadding / 2),
                   itemCount: controller.popularFoodList.length,
                   itemBuilder: (context, index) {
                     final product = controller.popularFoodList[index];
@@ -260,11 +317,11 @@ Widget _buildPopularFoodView(BuildContext context, HomeController controller) {
                       width: 180,
                       height: 220,
                       clipBehavior: Clip.antiAlias,
-                      margin: EdgeInsets.all(AppValues.contentPadding),
+                      margin: EdgeInsets.all(AppValues.contentPadding / 2),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadiusGeometry.circular(AppValues.parentCornerRadius),
-                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,10 +338,15 @@ Widget _buildPopularFoodView(BuildContext context, HomeController controller) {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(product.name ?? '-', style: Theme.of(context).textTheme.labelLarge!.copyWith(fontFamily: 'FontBold')),
+                                  Text(
+                                    product.name ?? '-',
+                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(fontFamily: 'FontBold'),
+                                  ),
                                   Text(
                                     product.restaurantName ?? '-',
-                                    style: Theme.of(context).textTheme.labelSmall!.copyWith(fontFamily: 'FontBold', color: Colors.grey),
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.labelSmall!.copyWith(fontFamily: 'FontBold', color: Colors.grey),
                                   ),
 
                                   Spacer(),
@@ -292,7 +354,9 @@ Widget _buildPopularFoodView(BuildContext context, HomeController controller) {
                                     children: [
                                       Text(
                                         '\$${(product.price ?? 0.0).toString()}',
-                                        style: Theme.of(context).textTheme.labelLarge!.copyWith(fontFamily: 'FontBold', color: Colors.black),
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.labelLarge!.copyWith(fontFamily: 'FontBold', color: Colors.black),
                                       ),
                                       Spacer(),
                                       Row(
@@ -301,7 +365,10 @@ Widget _buildPopularFoodView(BuildContext context, HomeController controller) {
                                           SizedBox(width: AppValues.contentPadding / 2),
                                           Text(
                                             (product.ratingCount ?? 0.0).toStringAsFixed(1),
-                                            style: Theme.of(context).textTheme.labelSmall!.copyWith(fontFamily: 'FontBold', color: Colors.green),
+                                            style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                                              fontFamily: 'FontBold',
+                                              color: Colors.green,
+                                            ),
                                           ),
                                         ],
                                       ),
